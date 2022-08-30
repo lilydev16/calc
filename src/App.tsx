@@ -3,7 +3,7 @@ import { useState } from 'react';
 import './App.css';
 
 function App() {
-  const [start, setStart] = useState(0)
+  const [total, setTotal] = useState(0)
   const [numA, setNumA] = useState(0)
   const [numB, setNumB] = useState(0)
   const [operator, setOperator] = useState('')
@@ -18,6 +18,35 @@ function App() {
 
   const handleOperator = (e: any) => {
     setOperator(e.target.value)
+  }
+
+  const add = () => {
+    return Number(numA) + Number(numB)
+  }
+
+  const substract = () => {
+    return Number(numA) - Number(numB)
+  }
+
+  const multiply = () => {
+    return Number(numA) * Number(numB)
+  }
+
+  const divide = () => {
+    return Number(numA) / Number(numB)
+  }
+
+  const handleTotal = () => {
+    let currentTotal = operator === 'add' ? add() : operator === 'substract' ? substract() : operator === 'multiply' ? multiply() : divide()
+    setTotal(currentTotal)
+    clearInputs()
+  }
+
+  const clearInputs = () => {
+    setNumA(0)
+    setNumB(0)
+    setOperator('')
+    setTotal(0)
   }
   
   return (
@@ -50,7 +79,8 @@ function App() {
           onChange={handleNumB}
         >
         </input>
-        <p>Solving the equation {numA} {operator} {numB} </p>
+        <button onClick={handleTotal}>Total</button>
+        <p>Solving the equation {numA} {operator} {numB} = {total} </p>
       </div>
     </div>
   );
