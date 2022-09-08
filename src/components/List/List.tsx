@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import type { Calculation } from '../App/App';
 import Card from "../Card/Card";
+import './List.css';
 
 interface ListProps {
   calculations: Calculation[]
@@ -19,7 +20,7 @@ const List: FC<ListProps> = ({ calculations }) => {
     )
   })
   return (
-    <div>
+    <div className="list">
       {calcList}
     </div>
   )

@@ -1,7 +1,8 @@
 import React, { useState, FC } from 'react';
 import './App.css';
-import Calculator from '../Calculator/Calculator'
-import List from '../List/List'
+import Header from '../Header/Header';
+import Calculator from '../Calculator/Calculator';
+import List from '../List/List';
 
 export interface Calculation {
   a: number; 
@@ -19,15 +20,10 @@ const App: FC = () => {
   }
   
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Calculator</h1>
-      </header>
-      <div>
-        <p>Calculate the total</p>
-        <Calculator addCalc={addCalc} />
-        <List calculations={calculations} />
-      </div>
+    <div className="app">
+      <Header />
+      <Calculator addCalc={addCalc} />
+      <List calculations={calculations} />
     </div>
   );
 }
