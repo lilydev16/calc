@@ -11,54 +11,54 @@ const Calculator: React.FC<Props> = ({ addCalc }) => {
   const [numB, setNumB] = useState<number>(0)
   const [operator, setOperator] = useState<string>("add")
 
-  const handleNumA = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNumA = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setNumA(Number(e.target.value))
   }
 
-  const handleNumB = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNumB = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setNumB(Number(e.target.value))
   }
 
-  const handleOperator = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleOperator = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     setOperator(e.target.value)
   }
 
-  const handleTotal = () => {
-      const currentTotal: number = operator === 'add' ? add() 
-        : operator === 'substract' ? substract() 
-        : operator === 'multiply' ? multiply() 
-        : divide()
-      console.log('current total', currentTotal) // the math is correct; logs the total
-      setTotal(currentTotal) // bug!!! state is not updating --- total
-      console.log('state total', total) // prints initial value 0 only, not current total
-      addCalcEntry()
-      clearInputs()
+  const handleTotal = (): void => {
+    const currentTotal: number = operator === 'add' ? add() 
+      : operator === 'substract' ? substract() 
+      : operator === 'multiply' ? multiply() 
+      : divide()
+    console.log('current total', currentTotal) // the math is correct; logs the total
+    setTotal(currentTotal) // bug!!! state is not updating --- total
+    console.log('state total', total) // prints initial value 0 only, not current total
+    addCalcEntry()
+    clearInputs()
   
   }
 
-  const add = () => {
+  const add = (): number => {
     return Number(numA) + Number(numB)
   }
 
-  const substract = () => {
+  const substract = (): number => {
     return Number(numA) - Number(numB)
   }
 
-  const multiply = () => {
+  const multiply = (): number => {
     return Number(numA) * Number(numB)
   }
 
-  const divide = () => {
+  const divide = (): number => {
     return Number(numA) / Number(numB)
   }
 
-  const clearInputs = () => {
+  const clearInputs = (): void => {
       setNumA(0)
       setNumB(0)
       setTotal(0)
   }
 
-  const addCalcEntry = () => {
+  const addCalcEntry = (): void => {
     const calcEntry: Calculation = {
       a: numA,
       b: numB,

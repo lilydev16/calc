@@ -14,7 +14,7 @@ const App: FC = () => {
   // const [calculations, setCalculations] = useState<{a: number, b: number, operator: string; result: number}[]>([])
   const [calculations, setCalculations] = useState<Calculation[]>([])
 
-  const addCalc = (entry: Calculation) => {
+  const addCalc = (entry: Calculation): void => {
     setCalculations([...calculations, entry])
   }
   
