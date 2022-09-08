@@ -1,17 +1,16 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState, FC } from 'react';
 import './App.css';
 import Calculator from '../Calculator/Calculator'
 import List from '../List/List'
 
 export interface Calculation {
-  a: number, 
-  b: number, 
-  operator: string; 
-  total: number
+  a: number; 
+  b: number; 
+  operator: string;
+  total: number;
 }
 
-function App() {
+const App: FC = () => {
   // const [calculations, setCalculations] = useState<{a: number, b: number, operator: string; result: number}[]>([])
   const [calculations, setCalculations] = useState<Calculation[]>([])
 
