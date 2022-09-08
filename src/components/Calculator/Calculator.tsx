@@ -2,11 +2,11 @@ import React from 'react';
 import { useState } from 'react';
 import type { Calculation } from '../App/App';
 
-export interface Props {
+interface Props {
   addCalc: Function;
 }
 
-const Calculator: React.FC<Props> = (props) => {
+const Calculator: React.FC<Props> = ({ addCalc }) => {
   const [total, setTotal] = useState(0)
   const [numA, setNumA] = useState(0)
   const [numB, setNumB] = useState(0)
@@ -67,7 +67,7 @@ const Calculator: React.FC<Props> = (props) => {
       total: total
     }
     console.log('entry', calcEntry)
-    props.addCalc(calcEntry)
+    addCalc(calcEntry)
   }
 
   return (
