@@ -9,6 +9,7 @@ export interface Calculation {
   b: number; 
   operator: string;
   total: number;
+  id: number;
 }
 
 const App: FC = () => {
@@ -18,12 +19,20 @@ const App: FC = () => {
   const addCalc = (entry: Calculation): void => {
     setCalculations([...calculations, entry])
   }
+
+  const deleteCalc = (id: number): void => {
+    const filteredCalculations = calculations.filter(calc => calc.id !== id)
+    setCalculations(filteredCalculations)
+    console.log(id)
+    console.log('all', calculations)
+    console.log('filtered', filteredCalculations)
+  }
   
   return (
     <div className="app">
       <Header />
       <Calculator addCalc={addCalc} />
-      <List calculations={calculations} />
+      <List calculations={calculations} deleteCalc={deleteCalc}/>
     </div>
   );
 }

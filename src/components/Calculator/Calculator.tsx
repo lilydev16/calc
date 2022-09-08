@@ -65,7 +65,8 @@ const Calculator: React.FC<Props> = ({ addCalc }) => {
       a: numA,
       b: numB,
       operator: operator,
-      total: total
+      total: total,
+      id: Date.now()
     }
     console.log('entry', calcEntry)
     addCalc(calcEntry)

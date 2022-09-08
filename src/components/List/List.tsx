@@ -4,18 +4,21 @@ import Card from "../Card/Card";
 import './List.css';
 
 interface ListProps {
-  calculations: Calculation[]
+  calculations: Calculation[];
+  deleteCalc: (id: number) => void;
 }
 
-const List: FC<ListProps> = ({ calculations }) => {
+const List: FC<ListProps> = ({ calculations, deleteCalc }) => {
   const calcList = calculations.map((calc, index): JSX.Element => {
     return (
       <Card
         key={index}
+        id={calc.id}
         a={calc.a}
         b={calc.b}
         operator={calc.operator}
         total={calc.total}
+        deleteCard={deleteCalc}
       />
     )
   })
