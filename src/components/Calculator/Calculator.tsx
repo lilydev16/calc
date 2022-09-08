@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import type { Calculation } from '../App/App';
+import './Calculator.css';
 
 interface Props {
   addCalc: (entry: Calculation) => void;
@@ -23,6 +24,7 @@ const Calculator: React.FC<Props> = ({ addCalc }) => {
     setOperator(e.target.value)
   }
 
+  // add event type
   const handleTotal = (): void => {
     const currentTotal: number = operator === 'add' ? add() 
       : operator === 'substract' ? substract() 
@@ -70,7 +72,7 @@ const Calculator: React.FC<Props> = ({ addCalc }) => {
   }
 
   return (
-    <div>
+    <div className='calculator-wrapper'>
       <input
           name="numA"
           placeholder="Enter a Number"
