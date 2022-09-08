@@ -1,37 +1,36 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import type { Calculation } from '../App/App';
 
 interface Props {
-  addCalc: Function;
+  addCalc: (entry: Calculation) => void;
 }
 
 const Calculator: React.FC<Props> = ({ addCalc }) => {
-  const [total, setTotal] = useState(0)
-  const [numA, setNumA] = useState(0)
-  const [numB, setNumB] = useState(0)
-  const [operator, setOperator] = useState("add")
+  const [total, setTotal] = useState<number>(0)
+  const [numA, setNumA] = useState<number>(0)
+  const [numB, setNumB] = useState<number>(0)
+  const [operator, setOperator] = useState<string>("add")
 
-  const handleNumA = (e: any) => {
-    setNumA(e.target.value)
+  const handleNumA = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNumA(Number(e.target.value))
   }
 
-  const handleNumB = (e: any) => {
-    setNumB(e.target.value)
+  const handleNumB = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNumB(Number(e.target.value))
   }
 
-  const handleOperator = (e: any) => {
+  const handleOperator = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setOperator(e.target.value)
   }
 
   const handleTotal = () => {
-      const currentTotal = operator === 'add' ? add() 
+      const currentTotal: number = operator === 'add' ? add() 
         : operator === 'substract' ? substract() 
         : operator === 'multiply' ? multiply() 
         : divide()
-      console.log('total', currentTotal) // the math is correct; logs the total
+      console.log('current total', currentTotal) // the math is correct; logs the total
       setTotal(currentTotal) // bug!!! state is not updating --- total
-      console.log('state total', total) // prints initial value 0
+      console.log('state total', total) // prints initial value 0 only, not current total
       addCalcEntry()
       clearInputs()
   
@@ -102,3 +101,9 @@ const Calculator: React.FC<Props> = ({ addCalc }) => {
 }
 
 export default Calculator;
+
+/*
+refactor handler fn
+- if e.target.name is x then update state of x
+- if e.target.name is y then update state of y
+*/
