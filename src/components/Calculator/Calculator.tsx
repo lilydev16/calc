@@ -7,7 +7,7 @@ interface Props {
 }
 
 const Calculator: React.FC<Props> = ({ addCalc }) => {
-  const [total, setTotal] = useState<number>(0)
+  // const [total, setTotal] = useState<number>(0)
   const [numA, setNumA] = useState<number>(0)
   const [numB, setNumB] = useState<number>(0)
   const [operator, setOperator] = useState<string>("add")
@@ -26,14 +26,24 @@ const Calculator: React.FC<Props> = ({ addCalc }) => {
 
   // add event type
   const handleTotal = (): void => {
-    const currentTotal: number = operator === 'add' ? add() 
-      : operator === 'substract' ? substract() 
+    let currentTotal: number = operator === 'add' ? add() 
+      : operator === 'subtract' ? subtract() 
       : operator === 'multiply' ? multiply() 
       : divide()
     console.log('current total', currentTotal) // the math is correct; logs the total
-    setTotal(currentTotal) // bug!!! state is not updating --- total
-    console.log('state total', total) // prints initial value 0 only, not current total
-    addCalcEntry()
+    // setTotal(currentTotal) // bug!!! the total state variable is not updating
+    // console.log('state total', total) // prints initial value 0 only, not the updated total
+
+    const calcEntry: Calculation = {
+      a: numA,
+      b: numB,
+      operator: operator,
+      total: currentTotal,
+      id: Date.now()
+    }
+    addCalc(calcEntry)
+
+    // addCalcEntry()
     clearInputs()
   
   }
@@ -42,7 +52,7 @@ const Calculator: React.FC<Props> = ({ addCalc }) => {
     return Number(numA) + Number(numB)
   }
 
-  const substract = (): number => {
+  const subtract = (): number => {
     return Number(numA) - Number(numB)
   }
 
@@ -57,20 +67,20 @@ const Calculator: React.FC<Props> = ({ addCalc }) => {
   const clearInputs = (): void => {
       setNumA(0)
       setNumB(0)
-      setTotal(0)
+      // setTotal(0)
   }
 
-  const addCalcEntry = (): void => {
-    const calcEntry: Calculation = {
-      a: numA,
-      b: numB,
-      operator: operator,
-      total: total,
-      id: Date.now()
-    }
-    console.log('entry', calcEntry)
-    addCalc(calcEntry)
-  }
+  // const addCalcEntry = (): void => {
+  //   const calcEntry: Calculation = {
+  //     a: numA,
+  //     b: numB,
+  //     operator: operator,
+  //     total: total,
+  //     id: Date.now()
+  //   }
+  //   console.log('entry', calcEntry)
+  //   addCalc(calcEntry)
+  // }
 
   return (
     <div className='calculator-wrapper'>
@@ -86,7 +96,7 @@ const Calculator: React.FC<Props> = ({ addCalc }) => {
           onChange={handleOperator}
         >
           <option value="add">Add</option>
-          <option value="substract">Subtract</option>
+          <option value="subtract">Subtract</option>
           <option value="multiply">Multiply</option>
           <option value="divide">Divide</option>
         </select>
