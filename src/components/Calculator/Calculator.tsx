@@ -7,7 +7,6 @@ interface Props {
 }
 
 const Calculator: React.FC<Props> = ({ addCalc }) => {
-  // const [total, setTotal] = useState<number>(0)
   const [numA, setNumA] = useState<number>(0)
   const [numB, setNumB] = useState<number>(0)
   const [operator, setOperator] = useState<string>("add")
@@ -26,14 +25,11 @@ const Calculator: React.FC<Props> = ({ addCalc }) => {
 
   // add event type
   const handleTotal = (): void => {
-    let currentTotal: number = operator === 'add' ? add() 
+    const currentTotal: number = operator === 'add' ? add() 
       : operator === 'subtract' ? subtract() 
       : operator === 'multiply' ? multiply() 
       : divide()
-    console.log('current total', currentTotal) // the math is correct; logs the total
-    // setTotal(currentTotal) // bug!!! the total state variable is not updating
-    // console.log('state total', total) // prints initial value 0 only, not the updated total
-
+    
     const calcEntry: Calculation = {
       a: numA,
       b: numB,
@@ -42,10 +38,7 @@ const Calculator: React.FC<Props> = ({ addCalc }) => {
       id: Date.now()
     }
     addCalc(calcEntry)
-
-    // addCalcEntry()
-    clearInputs()
-  
+    clearInputs() 
   }
 
   const add = (): number => {
@@ -67,20 +60,7 @@ const Calculator: React.FC<Props> = ({ addCalc }) => {
   const clearInputs = (): void => {
       setNumA(0)
       setNumB(0)
-      // setTotal(0)
   }
-
-  // const addCalcEntry = (): void => {
-  //   const calcEntry: Calculation = {
-  //     a: numA,
-  //     b: numB,
-  //     operator: operator,
-  //     total: total,
-  //     id: Date.now()
-  //   }
-  //   console.log('entry', calcEntry)
-  //   addCalc(calcEntry)
-  // }
 
   return (
     <div className='calculator-wrapper'>
